@@ -39,6 +39,7 @@ Para ejecutar el script:
 
 
 ## Consideraciones
+- Si las variables no son ingresadas en la terminal, el programa las pedirá cada vez que se ejecute, lo que podría derivar en errores en caso de automatizar la ejecución.
 - Los backups se nombran automáticamente con fecha y hora para facilitar su organización.
 - Los respaldos con más de 7 días son eliminados automáticamente al usar la opción --clear.
 - El programa puede ser sincronizado utilizando crontab.
