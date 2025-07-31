@@ -11,7 +11,9 @@ Este script en Bash permite automatizar la generación, visualización, limpieza
 
 
 ## Uso
-- Implementar la variable que almacena la contraseña de la base de datos, ingresando en la terminal: `export DB_PASSWORD="passwd"`
+- Implementar la variable que almacena **el nombre usuario** de la base de datos, ingresando en la terminal: `export USERNAME="tu_username"`
+- Implementar la variable que almacena **la contraseña** de la base de datos, ingresando en la terminal: `export DB_PASSWORD="passwd"`
+- Implementar la variable que almacena **el nombre de la base de datos**, ingresando en la terminal: `export DB_PASSWORD="nombre_database"`
 - Dar permisos de ejecución `sudo chmod +x ./db_backup.sh`
 - Recomiendo implementar un alias para el uso de este script, ingresando a ~/.bashrc :
 `sudo nano ~/.bashrc`
