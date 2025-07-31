@@ -1,8 +1,7 @@
 #!/bin/bash
 
-OPTS=$(getopt -o hlcb:s --long help,list,clear,backup:,show -n 'test.sh' -- "$@")
+OPTS=$(getopt -o hlcbs --long help,list,clear,backup,show -n 'db_backup.sh' -- "$@")
 
-PASSWD=""
 TIMESTAMP_DATE=$(date +"%d-%m-%Y")
 TIMESTAMP_HOUR=$(date +"%H-%M-%S")
 FULLDIR="INGRESAR/UBICACION/DE/ARCHIVOS"
@@ -36,18 +35,28 @@ help(){
         echo "  -c, --clear                     Limpia los backups antiguos"
         echo "  -s,--show                       Muestra el codigo SQL del último backup"
         echo "  -h, help                        Muestra este mensaje de ayuda :)"
+        echo "!!! Requiere que la variable de entorno DB_PASSWORD esté definida !!!"
         echo
 }
 
 fullBackup() {
-local PSW="$1"
-
-if [ -z "$PSW" ]; then
-        echo "[ERROR] No se proporcionó contraseña para el backup."
-        exit 1
+if [ -z "$USERNAME" ]; then
+    read -p "Nombre de usuario: " USERNAME
+fi
+if [ -z "$DB_PASSWORD" ]; then
+        read -s -p "Contraseña para la base de datos: " DB_PASSWORD
+        echo
+fi
+if [ -z "$DATABASE_NAME" ]; then
+    read -p "Nombre de la base de datos: " DATABASE_NAME
 fi
 
-mariadb-dump --user=username --password="$PSW" --lock-tables --extended-insert --databases database_name > $FULLDIR/$FILENAME
+if [ -z "$USERNAME" ] || [ -z "$DB_PASSWORD" ] || [ -z "$DATABASE_NAME" ]; then
+  echo "[ERROR] Usuario, contraseña o nombre de base de datos no pueden estar vacíos."
+  exit 1
+fi
+
+mariadb-dump --user="$USERNAME" --password="$DB_PASSWORD"  --lock-tables --extended-insert --databases $DATABASE_NAME > $FULLDIR/$FILENAME
 
 if [ $? -eq 0 ]; then
         echo "[OK] - ["${TIMESTAMP_HOUR}" - "${TIMESTAMP_DATE}"] Backup generado"
@@ -101,8 +110,7 @@ while true; do
                 ;;
         -b | --backup)
                 BACKUP=true
-                PASSWD="$2"
-                shift 2
+                shift
                 ;;
         -s | --show)
                 SHOW=true
@@ -135,7 +143,7 @@ if [ "$CLEAR" = true ]; then
 fi
 
 if [ "$BACKUP" = true ]; then
-        fullBackup "$PASSWD"
+        fullBackup
         exit 0
 fi
 
