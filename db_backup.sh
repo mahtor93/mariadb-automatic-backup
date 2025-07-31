@@ -5,7 +5,7 @@ OPTS=$(getopt -o hlcb:s --long help,list,clear,backup:,show -n 'test.sh' -- "$@"
 PASSWD=""
 TIMESTAMP_DATE=$(date +"%d-%m-%Y")
 TIMESTAMP_HOUR=$(date +"%H-%M-%S")
-FULLDIR="/home/lab/Scripts/database/testBackup"
+FULLDIR="INGRESAR/UBICACION/DE/ARCHIVOS"
 FILENAME="backup_"${TIMESTAMP_HOUR}_${TIMESTAMP_DATE}".sql"
 RETENTION_DAYS=7
 
