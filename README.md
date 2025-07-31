@@ -24,8 +24,8 @@ Para ejecutar el script:
 `./db_backup.sh [opciones]`
 
 ## Opciones disponibles:
-- Realiza un backup de la base de datos usando la contraseña proporcionada.
-    - `-b` o `--backup <contraseña>`
+- Realiza un backup de la base de datos usando la contraseña proporcionada en la variable DB_PASSWORD.
+    - `-b` o `--backup`
 - Lista los backups existentes.
     - `-l` o `--list`
 - Elimina los respaldos con más de 7 días de antigüedad.
