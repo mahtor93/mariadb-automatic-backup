@@ -36,11 +36,12 @@ Para ejecutar el script:
 
 
 ## Consideraciones
-- La contraseña de la base de datos se pasa como argumento en línea de comandos. Esto puede ser inseguro si se expone el historial del terminal. Se recomienda modificar el script para usar una variable de entorno o leer desde un archivo seguro si se usa en entornos de producción.
 - Los backups se nombran automáticamente con fecha y hora para facilitar su organización.
 - Los respaldos con más de 7 días son eliminados automáticamente al usar la opción --clear.
+- El programa puede ser sincronizado utilizando crontab.
 
 ## Requisitos
 - Bash
 - mariadb-dump
 - Herramientas estándar de Unix como gzip, zless, awk, find, etc.
+- crontab
